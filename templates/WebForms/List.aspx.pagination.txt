@@ -1,0 +1,67 @@
+<h1>[DOMAIN_OBJECT_NAME]s</h1>
+<asp:Label id="lblMessage" runat="server"></asp:Label>
+
+<asp:GridView id="GridView1" runat="server" AutoGenerateColumns="False" 
+	CssClass="cTable"
+    AllowPaging="True" 
+    OnPageIndexChanging="GridView1_PageIndexChanging" 
+    PagerSettings-Position="Top" 
+    PageSize="5" 
+    PagerSettings-Mode="Numeric"
+	AllowSorting="True" 
+    OnSorting="GridView1_Sorting"
+	DataKeyNames="[DOMAIN_OBJECT_ID_NAME]"
+    OnRowDeleting="GridView1_RowDeleting"
+    OnRowCommand="GridView1_RowCommand">  
+
+<HeaderStyle CssClass="cTable" />    
+<AlternatingRowStyle CssClass="cTableAltRow" />
+
+<PagerTemplate>
+    <asp:ImageButton ID="ImageButton1" runat="server"
+        ImageUrl="~/images/pagination_first.gif" CommandArgument="First" CommandName="Paginate"  />
+    <asp:ImageButton ID="ImageButton2" runat="server"
+        ImageUrl="~/images/pagination_prev.gif" CommandArgument="Prev" CommandName="Paginate" />
+
+    Page
+    <asp:DropDownList ID="ddlPages" runat="server"
+        AutoPostBack="True" OnSelectedIndexChanged="ddlPages_SelectedIndexChanged">
+    </asp:DropDownList> of <asp:Label ID="lblPageCount"
+        runat="server"></asp:Label>
+
+    <asp:ImageButton ID="ImageButton3" runat="server"
+        ImageUrl="~/images/pagination_next.gif" CommandArgument="Next" CommandName="Paginate"  />
+    <asp:ImageButton ID="ImageButton4" runat="server"
+        ImageUrl="~/images/pagination_last.gif" CommandArgument="Last" CommandName="Paginate"  />
+</PagerTemplate>
+
+<Columns>
+
+    [LIST_FORM_OBJECT_ROWS]
+    
+    <asp:TemplateField ItemStyle-Wrap="False">
+        <ItemTemplate>
+            <a href='edit.aspx?id=<%# DataBinder.Eval(Container, "DataItem.[DOMAIN_OBJECT_ID_NAME]") %>'><img src='/images/edit.gif' /></a>
+        </ItemTemplate>
+    </asp:TemplateField>
+    
+    
+   <asp:TemplateField ShowHeader="False">
+     <ItemTemplate> 
+       <asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="False" CommandName="Delete"
+                    OnClientClick='return confirm("Are you sure you want to delete this entry?");' 
+                    Text="<img src='/images/delete.gif' />" />
+     </ItemTemplate>
+   </asp:TemplateField>
+    
+</Columns>
+
+</asp:GridView>
+
+
+
+<br />
+
+<asp:Button id="btnAdd" runat="server" Text="Add New" OnClick="btnAdd_Click">
+
+</asp:Button>

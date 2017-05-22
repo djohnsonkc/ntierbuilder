@@ -1,0 +1,48 @@
+<h1>[DOMAIN_OBJECT_NAME]s</h1>
+<asp:Label id="lblMessage" runat="server"></asp:Label>
+
+<asp:GridView id="GridView1" runat="server" AutoGenerateColumns="False" 
+	CssClass="cTable"
+	DataKeyNames="[DOMAIN_OBJECT_ID_NAME]"
+	AllowSorting="True" 
+    OnSorting="GridView1_Sorting"
+    OnRowDataBound="GridView1_RowDataBound" 
+    OnRowEditing="GridView1_RowEditing" 
+    OnRowCancelingEdit="GridView1_RowCancelingEdit" 
+    OnRowUpdating="GridView1_RowUpdating"
+    OnRowDeleting="GridView1_RowDeleting">  
+    
+<HeaderStyle CssClass="cTable" />     
+<AlternatingRowStyle CssClass="cTableAltRow" />
+
+<Columns>
+
+    [LIST_FORM_OBJECT_ROWS]
+    
+
+    <asp:CommandField ButtonType="Image" ShowEditButton="True"               
+                editimageurl="/images/edit.gif"
+                cancelimageurl="/images/cancel.gif"
+                updateimageurl="/images/update.gif"
+                headertext="" />
+    
+    
+	<asp:TemplateField ShowHeader="False">
+		<ItemTemplate> 
+			<asp:LinkButton ID="LinkButtonDelete" runat="server" CausesValidation="False" CommandName="Delete"
+			OnClientClick='return confirm("Are you sure you want to delete this entry?");' 
+			Text="<img src='/images/delete.gif' />" />
+		</ItemTemplate>
+	</asp:TemplateField>
+    
+</Columns>
+
+</asp:GridView>
+
+
+
+<br />
+
+<asp:Button id="btnAdd" runat="server" Text="Add New" OnClick="btnAdd_Click">
+
+</asp:Button>

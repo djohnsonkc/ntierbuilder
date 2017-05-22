@@ -1,0 +1,7 @@
+
+                if (this.sort_by == "[COLUMN_NAME]")
+                {
+                    return (this.m_direction == SortDirection.Ascending) ?
+                        [DOMAIN_OBJECT_NAME]X.[COLUMN_NAME].CompareTo([DOMAIN_OBJECT_NAME]Y.[COLUMN_NAME]) :
+                        [DOMAIN_OBJECT_NAME]Y.[COLUMN_NAME].CompareTo([DOMAIN_OBJECT_NAME]X.[COLUMN_NAME]);
+                }

@@ -1,0 +1,21 @@
+using System;
+
+namespace [ADAPTER_CLASS_NAMESPACE]
+{
+	public class Utils
+	{
+		public Utils()
+		{
+		}
+
+		public static string ReplaceNullValue(string currValue, string replacementValue)
+		{
+			string returnValue = currValue;
+			if(currValue == null || currValue == "")
+			{
+				returnValue = replacementValue;
+			}
+			return returnValue;
+		}
+	}
+}

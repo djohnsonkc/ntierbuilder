@@ -1,0 +1,14 @@
+private void load[DOMAIN_OBJECT_NAME]Collection()
+{
+    [DOMAIN_OBJECT_NAME]Adapter adapter = new [DOMAIN_OBJECT_NAME]Adapter();
+    [DOMAIN_OBJECT_NAME] obj = new [DOMAIN_OBJECT_NAME]();
+    List&lt;[DOMAIN_OBJECT_NAME]&gt; collection = adapter.LoadCollection(obj);
+    ddl[DOMAIN_OBJECT_NAME]ID.DataValueField = "[DOMAIN_OBJECT_DATA_VALUE_FIELD]";
+    ddl[DOMAIN_OBJECT_NAME]ID.DataTextField = "[DOMAIN_OBJECT_DATA_TEXT_FIELD]"; 
+    ddl[DOMAIN_OBJECT_NAME]ID.DataSource = collection;
+    ddl[DOMAIN_OBJECT_NAME]ID.DataBind();
+
+    ListItem item = new ListItem("-- Select a [DOMAIN_OBJECT_NAME] --", "0");
+    ddl[DOMAIN_OBJECT_NAME]ID.Items.Insert(0, item);
+
+}

@@ -1,0 +1,2 @@
+<asp:RequiredFieldValidator ID="RequiredFieldValidator[DOMAIN_OBJECT_PROPERTY_NAME]" runat="server" ControlToValidate="txt[DOMAIN_OBJECT_PROPERTY_NAME]"
+        Display="None" ErrorMessage="Missing [DOMAIN_OBJECT_PROPERTY_NAME]"></asp:RequiredFieldValidator>

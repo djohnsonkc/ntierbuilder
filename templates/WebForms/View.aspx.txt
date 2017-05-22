@@ -1,0 +1,11 @@
+<h1>[DOMAIN_OBJECT_NAME] Information</h1>
+
+<asp:Label ID="lblMessage" runat="server"></asp:Label><br />
+<table cellpadding="3">
+[VIEW_FORM_OBJECT_ROWS]
+</table>
+<br />
+<br />
+<asp:Button id="btnEdit" runat="server" Text=" Edit " OnClick="btnEdit_Click"></asp:Button>
+<asp:Button id="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" Enabled="False"></asp:Button>
+<asp:Button id="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click"></asp:Button>

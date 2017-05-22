@@ -1,0 +1,129 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Collections;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+using Sales.Data;
+using Sales.Domain;
+
+public partial class Edit : System.Web.UI.Page
+{
+    int id = 0;
+
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        if (Request.QueryString["id"] != null)
+            id = int.Parse(Request.QueryString["id"].ToString());
+
+        if (id == 0)
+        {
+            btnAdd.Visible = true;
+            btnSave.Visible = false;
+        }
+        else
+        {
+            btnAdd.Visible = false;
+            btnSave.Visible = true;
+        }
+
+        if (!IsPostBack)
+        {
+            if (id != 0)
+                loadObject(id);
+        }
+    }
+
+
+    private void loadObject(int id)
+    {
+        try
+        {
+            CustomerAdapter adapter = new CustomerAdapter();
+            Customer obj = new Customer();
+            obj.CustomerID = id;
+            adapter.Load(obj);
+
+            lblCustomerID.Text = obj.CustomerID.ToString();
+            txtName.Text = obj.Name.ToString();
+            txtAddress.Text = obj.Address.ToString();
+            txtCity.Text = obj.City.ToString();
+            txtState.Text = obj.State.ToString();
+            txtZip.Text = obj.Zip.ToString();
+            cbActive.Checked = obj.Active;
+            lblDateCreated.Text = obj.DateCreated.ToString();
+
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text = ex.Message + ". " + ex.StackTrace;
+        }
+
+    }
+
+    protected void btnAdd_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            CustomerAdapter adapter = new CustomerAdapter();
+            Customer obj = new Customer();
+
+            obj.Name = txtName.Text;
+            obj.Address = txtAddress.Text;
+            obj.City = txtCity.Text;
+            obj.State = txtState.Text;
+            obj.Zip = txtZip.Text;
+            obj.Active = cbActive.Checked;
+            obj.DateCreated = DateTime.Now;
+
+
+            adapter.Insert(obj);
+
+            Response.Redirect("List.aspx");
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text = ex.Message + ". " + ex.StackTrace;
+        }
+    }
+
+    protected void btnSave_Click(object sender, EventArgs e)
+    {
+        try
+        {
+            CustomerAdapter adapter = new CustomerAdapter();
+            Customer obj = new Customer();
+            obj.CustomerID = id;
+            //retrieve current values
+            adapter.Load(obj);
+            //change values
+            obj.Name = txtName.Text;
+            obj.Address = txtAddress.Text;
+            obj.City = txtCity.Text;
+            obj.State = txtState.Text;
+            obj.Zip = txtZip.Text;
+            obj.Active = cbActive.Checked;
+            obj.DateCreated = DateTime.Now;
+
+            adapter.Update(obj);
+            Response.Redirect("List.aspx");
+        }
+        catch (Exception ex)
+        {
+            lblMessage.Text = ex.Message + ". " + ex.StackTrace;
+        }
+
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("List.aspx");
+    }
+
+}
+

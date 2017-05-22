@@ -1,0 +1,83 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="~/MasterPage.master.cs" Inherits="master_MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>
+        
+    </title>
+    <link href="/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <table cellpadding="0" cellspacing="0" style="border: solid 0 red; width: 80%">
+            <tr>
+                <td style="height:105px;width: 14px"><img src='/images/header_top_left.gif' /></td>
+                <td style="height:105px; width: 100%; background-image: url(/images/headerbg2.gif); background-repeat:repeat-x;">
+                    
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">                        <tr>                        <td class="headerleft" valign="top"><a href='/Default.aspx'><img src="/images/headerlogo2.gif" /></a></td>                        <td class="headerright" valign="bottom">
+                        
+                        
+                            <div style="text-align:right;padding:0 0 50px 0;color:#ffffff;font-weight:bold;">                                <asp:Label ID="lblWelcome" runat="server"></asp:Label>           
+                            </div>
+
+                            
+			<ul id="tabnav">
+				<li><a id="A1" href="~/Default.aspx" runat="server">HOME</a></li>
+				<li><a id="A2" href="~/Start.aspx" runat="server">START</a></li>
+				<li><a id="A3" href="~/Setup.aspx" runat="server">SETUP</a></li>
+				<li><a id="A4" href="~/Business.aspx" runat="server">BUSINESS</a></li>
+				<li><a id="A5" href="~/Data.aspx" runat="server">DATA</a></li>
+				<li><a id="A6" href="~/Presentation.aspx" runat="server">PRESENTATION</a></li>
+				<li><a id="A7" href="~/Sorter.aspx" runat="server">SORT/FIND</a></li>
+				<li><a id="A8" href="~/Tips.aspx" runat="server">TIPS</a></li>
+				<li><a id="A10" href="~/Contact.aspx" runat="server">CONTACT</a></li>
+				<li><a id="A11" href="~/Logout.aspx" runat="server">LOGOUT</a></li>
+			</ul>
+                        
+                        </td>
+                        </tr>    
+                    </table>
+                    
+                </td>
+                <td style="height:105px;width: 14px"><img src='/images/header_top_right.gif' /></td>
+            </tr>
+            <tr>
+                <td style="width: 14px;background-image: url(/images/body_left.gif); background-repeat:repeat-y;">
+                    &nbsp;
+                </td>
+                <td style="padding: 10px 10px 10px 0; vertical-align:top; height:200px;background-color:#ffffff; width: 100%">
+                    <!-- MAIN BODY SECTION-->                    <div id="content">               
+                     
+                    
+                        <asp:ContentPlaceHolder ID="ContentMain" runat="server">
+                        </asp:ContentPlaceHolder>
+                        <br />
+                        <br />                    </div>                </td>
+                <td style="width: 14px;background-image: url(/images/body_right.gif); background-repeat:repeat-y;">
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td style="height: 20px; width: 14px">
+                    <img src='/images/footer_left.gif' />
+                </td>
+                <td style="padding: 0 0 10px 2px; background-image: url(/images/footerbg2.gif); background-repeat:repeat-x; height: 20px;width: 100%">
+                    
+                        <!-- FOOTER SECTION-->                        <table width="100%" border="0" cellspacing="0" cellpadding="0">                            <tr>                                <td class="footerleft" valign="top">Copyright 2007. &copy; Inspired Effect &trade;. All Rights Reserved</td>                                <td class="footerright" valign="top">                                    <a href="/Default.aspx">Home</a> 
+                                    <asp:Literal ID="litLinks" runat="server"></asp:Literal>
+                                </td>                            </tr>                        </table>
+                    
+                </td>
+                <td style="height: 20px; width: 14px">
+                    <img src='/images/footer_right.gif' />
+                </td>
+            </tr>
+        </table>
+    
+</form>
+</body>
+
+</html>

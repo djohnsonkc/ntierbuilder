@@ -1,0 +1,89 @@
+using System;
+using System.Data;
+using System.Configuration;
+using System.Web;
+using System.Web.Security;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Web.UI.WebControls.WebParts;
+using System.Web.UI.HtmlControls;
+
+/// <summary>
+/// Summary description for GridViewPagination
+/// </summary>
+public class GridViewPagination
+{
+	public GridViewPagination()
+	{
+	}
+
+
+    public static void LoadPageList(GridView gv)
+    {
+
+        GridViewRow gvRow = gv.TopPagerRow;
+
+        if (gvRow == null)
+            return;
+
+        // get your controls from the gridview
+        DropDownList ddlPages = (DropDownList)gvRow.Cells[0].FindControl("ddlPages");
+        Label lblPageCount = (Label)gvRow.Cells[0].FindControl("lblPageCount");
+
+        if (ddlPages != null)
+        {
+            // populate pager
+            for (int i = 0; i < gv.PageCount; i++)
+            {
+
+                int intPageNumber = i + 1;
+                ListItem lstItem = new ListItem(intPageNumber.ToString());
+
+                if (i == gv.PageIndex)
+                {
+                    lstItem.Selected = true;
+                }
+
+                ddlPages.Items.Add(lstItem);
+
+            }
+        }
+
+        // populate page count
+        if (lblPageCount != null)
+            lblPageCount.Text = gv.PageCount.ToString();
+
+    }
+
+
+    public static void PageListSelectedIndexChanged(GridView gv)
+    {
+        GridViewRow gvRow = gv.TopPagerRow;
+        DropDownList ddlPages = (DropDownList)gvRow.Cells[0].FindControl("ddlPages");
+
+        gv.PageIndex = ddlPages.SelectedIndex;
+        
+    }
+
+    public static void Paginate(GridView gv, object sender, CommandEventArgs e)
+    {
+        // get the current page selected
+        int intCurIndex = gv.PageIndex;
+
+        switch (e.CommandArgument.ToString().ToLower())
+        {
+            case "first":
+                gv.PageIndex = 0;
+                break;
+            case "prev":
+                gv.PageIndex = intCurIndex - 1;
+                break;
+            case "next":
+                gv.PageIndex = intCurIndex + 1;
+                break;
+            case "last":
+                gv.PageIndex = gv.PageCount;
+                break;
+        }
+    }
+}

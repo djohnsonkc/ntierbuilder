@@ -1,0 +1,24 @@
+using System;
+
+namespace [DOMAIN_OBJECT_NAMESPACE]
+{
+
+	public class [DOMAIN_OBJECT_NAME]
+	{
+		//private properties
+		[PRIVATE_PROPERTIES]
+
+		//public properties
+		[PUBLIC_PROPERTIES]
+
+
+		//constructor
+		public [DOMAIN_OBJECT_NAME]()
+		{
+		}
+
+
+	}
+
+}
+

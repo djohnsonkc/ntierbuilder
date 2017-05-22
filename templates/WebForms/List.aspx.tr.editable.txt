@@ -1,0 +1,8 @@
+<asp:TemplateField HeaderText="[DOMAIN_OBJECT_PROPERTY_NAME]" SortExpression="[DOMAIN_OBJECT_PROPERTY_NAME]" >
+    <EditItemTemplate>
+        <asp:TextBox ID="txt[DOMAIN_OBJECT_PROPERTY_NAME]" runat="server" Text='<%# DataBinder.Eval(Container, "DataItem.[DOMAIN_OBJECT_PROPERTY_NAME]") %>' Width="100px"></asp:TextBox>
+    </EditItemTemplate>
+    <ItemTemplate>
+        <%# DataBinder.Eval(Container, "DataItem.[DOMAIN_OBJECT_PROPERTY_NAME]") %>
+    </ItemTemplate>
+</asp:TemplateField>

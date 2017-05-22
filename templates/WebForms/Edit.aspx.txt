@@ -1,0 +1,20 @@
+<h1>[DOMAIN_OBJECT_NAME] Information - <asp:Label ID="lblName" runat="server" Text=""></asp:Label></h1>
+* indicates required field
+
+<asp:ValidationSummary ID="ValidationSummary1" runat="server" 
+HeaderText="Please include the following information:" Width="468px" />
+[REQUIRED_FIELD_VALIDATOR]
+
+<asp:Label id="lblMessage" runat="server"></asp:Label>
+<br />
+<br />
+<table cellpadding="1" cellspacing="1">
+
+[EDIT_FORM_OBJECT_ROWS]
+</table>
+<br />
+<asp:Button id="btnAdd" runat="server" Text="Save New [DOMAIN_OBJECT_NAME]" OnClick="btnAdd_Click"></asp:Button>
+<asp:Button id="btnSave" runat="server" Text="Save Changes" OnClick="btnSave_Click"></asp:Button>
+<asp:Button id="btnDelete" runat="server" Text="Delete" OnClick="btnDelete_Click" CausesValidation="False"></asp:Button>
+<asp:Button id="btnCancel" runat="server" Text="Cancel" OnClick="btnCancel_Click" CausesValidation="False"></asp:Button> 
+

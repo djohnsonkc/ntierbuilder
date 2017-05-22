@@ -1,0 +1,104 @@
+using System;
+using System.Data;
+using System.Collections.Generic;
+using Sales.Domain;
+
+namespace Sales.Data
+{
+    public class CustomerAdapter : BaseAdapter
+    {
+
+        public CustomerAdapter()
+        {
+        }
+
+        public void Insert(Customer obj)
+        {
+            SetCommand("p_customer_insert");
+            setParameters(obj);
+            AddOutputParameter("ID");
+            ExecuteNonQuery();
+            obj.CustomerID = GetInt32IdentityValue();
+            Close();
+        }
+
+        public void Delete(Customer obj)
+        {
+            SetCommand("p_customer_delete");
+            AddInputParameter("CustomerID", obj.CustomerID);
+            ExecuteNonQuery();
+            Close();
+        }
+
+        public void Update(Customer obj)
+        {
+            SetCommand("p_customer_update");
+            AddInputParameter("CustomerID", obj.CustomerID);
+            setParameters(obj);
+            ExecuteNonQuery();
+            Close();
+        }
+
+        public void Load(Customer obj)
+        {
+            SetCommand("p_customer_select");
+            AddInputParameter("CustomerID", obj.CustomerID);
+            ExecuteReader();
+
+            if (ReaderHasData())
+                setProperties(obj, reader);
+
+            Close();
+        }
+
+        public List<Customer> LoadCollection(Customer obj)
+        {
+            List<Customer> collection = new List<Customer>();
+
+            SetCommand("p_customer_select");
+
+            //add optional search parameters (example)           
+            //if(obj.Status != null)
+            //	AddInputParameter("status", obj.Status);	
+
+            ExecuteReader();
+            while (ReaderHasData())
+            {
+                Customer item = new Customer();
+                item.CustomerID = (int)reader["CustomerID"];
+                setProperties(item, reader);
+                collection.Add(item);
+            }
+            Close();
+            return collection;
+        }
+
+        internal void setProperties(Customer obj, IDataReader reader)
+        {
+            //Note: set the ID seperately to allow this to be used by the Insert() method.
+            obj.Name = DataReader.GetString("Name", reader);
+            obj.Address = DataReader.GetString("Address", reader);
+            obj.City = DataReader.GetString("City", reader);
+            obj.State = DataReader.GetString("State", reader);
+            obj.Zip = DataReader.GetString("Zip", reader);
+            obj.Active = DataReader.GetBoolean("Active", reader);
+            obj.DateCreated = DataReader.GetDateTime("DateCreated", reader);
+
+        }
+
+        private void setParameters(Customer obj)
+        {
+            //Note: set the ID seperately to allow this to be used by the Insert() method.
+            AddInputParameter("Name", obj.Name);
+            AddInputParameter("Address", obj.Address);
+            AddInputParameter("City", obj.City);
+            AddInputParameter("State", obj.State);
+            AddInputParameter("Zip", obj.Zip);
+            AddInputParameter("Active", obj.Active);
+            AddInputParameter("DateCreated", obj.DateCreated);
+
+        }
+
+    }
+}
+

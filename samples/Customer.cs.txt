@@ -1,0 +1,68 @@
+using System;
+
+namespace Sales.Domain
+{
+
+	public class Customer
+	{
+
+		private int customerid;
+		private string name;
+		private string address;
+		private string city;
+		private string state;
+		private string zip;
+		private bool active;
+		private DateTime datecreated;
+
+		public int CustomerID
+		{
+			set { customerid = value; }
+			get { return customerid; }
+		}
+		public string Name
+		{
+			set { name = value; }
+			get { return name; }
+		}
+		public string Address
+		{
+			set { address = value; }
+			get { return address; }
+		}
+		public string City
+		{
+			set { city = value; }
+			get { return city; }
+		}
+		public string State
+		{
+			set { state = value; }
+			get { return state; }
+		}
+		public string Zip
+		{
+			set { zip = value; }
+			get { return zip; }
+		}
+		public bool Active
+		{
+			set { active = value; }
+			get { return active; }
+		}
+		public DateTime DateCreated
+		{
+			set { datecreated = value; }
+			get { return datecreated; }
+		}
+
+
+		public Customer()
+		{
+		}
+
+
+	}
+
+}
+

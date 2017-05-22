@@ -1,0 +1,105 @@
+using System;
+using System.Data;
+using System.Collections.Generic;
+using [DOMAIN_OBJECT_NAMESPACE];
+
+namespace [ADAPTER_CLASS_NAMESPACE]
+{
+	public class [ADAPTER_CLASS_NAME] : BaseAdapter
+	{
+	
+		public [ADAPTER_CLASS_NAME]()
+		{
+		}
+
+		public void Insert([DOMAIN_OBJECT_NAME] obj)
+		{
+		    SetCommand("[PROC_ADD]");
+		    setParameters(obj);
+		    AddOutputParameter("ID");
+		    ExecuteNonQuery();
+		    obj.[DOMAIN_OBJECT_ID_NAME] = GetInt[PK_SIZE]IdentityValue();
+		    Close();
+		}
+
+		public void Delete([DOMAIN_OBJECT_NAME] obj)
+		{
+		    SetCommand("[PROC_DELETE]");			
+		    AddInputParameter("[DOMAIN_OBJECT_ID_NAME]", obj.[DOMAIN_OBJECT_ID_NAME]);		
+		    ExecuteNonQuery();			
+		    Close();
+		}
+
+		public void Update([DOMAIN_OBJECT_NAME] obj)
+		{
+		    SetCommand("[PROC_UPDATE]");			
+		    AddInputParameter("[DOMAIN_OBJECT_ID_NAME]", obj.[DOMAIN_OBJECT_ID_NAME]);		
+		    setParameters(obj);
+		    ExecuteNonQuery();			
+		    Close();
+		}
+
+		public bool Load([DOMAIN_OBJECT_NAME] obj)
+		{
+		    bool result = false;			
+		    SetCommand("[PROC_RETRIEVE]");			
+		    AddInputParameter("[DOMAIN_OBJECT_ID_NAME]", obj.[DOMAIN_OBJECT_ID_NAME]);			
+		    ExecuteReader();
+
+		    if(ReaderHasData()) 
+		    {			
+		        result = true;
+               		obj.[DOMAIN_OBJECT_ID_NAME] = ([PK_TYPE])reader["[DOMAIN_OBJECT_ID_NAME]"];
+		        setProperties(obj, reader);
+		    }			
+        			
+		    Close();
+			
+		    return result;
+		}
+
+		public List<[DOMAIN_OBJECT_NAME]> LoadCollection([DOMAIN_OBJECT_NAME] obj)
+		{
+	            List<[DOMAIN_OBJECT_NAME]> collection = new List<[DOMAIN_OBJECT_NAME]>();
+
+		    SetCommand("[PROC_RETRIEVE]");	
+
+		    //search parameters        
+		    //if(obj.Status != null)
+		    //	AddInputParameter("status", obj.Status);	
+
+		    ExecuteReader();
+		    while(ReaderHasData())
+		    {
+			[DOMAIN_OBJECT_NAME] item = new [DOMAIN_OBJECT_NAME]();
+               		item.[DOMAIN_OBJECT_ID_NAME] = ([PK_TYPE])reader["[DOMAIN_OBJECT_ID_NAME]"];
+			setProperties(item, reader);
+			collection.Add(item);
+		    }
+		    Close();
+		    return collection;
+		}
+
+		public List<[DOMAIN_OBJECT_NAME]> LoadCollection()
+		{
+		    [DOMAIN_OBJECT_NAME] obj = new [DOMAIN_OBJECT_NAME]();	
+	            List<[DOMAIN_OBJECT_NAME]> collection = LoadCollection(obj);
+
+		    return collection;
+		}
+
+		private void setProperties([DOMAIN_OBJECT_NAME] obj, IDataReader reader)
+		{
+		    //Note: set the ID seperately to allow this to be used by the Insert() method.
+		    [ADAPTER_PROPERTIES]
+		}
+
+		private void setParameters([DOMAIN_OBJECT_NAME] obj)
+		{
+		    //Note: set the ID seperately to allow this to be used by the Insert() method.
+		    [ADAPTER_PARAMETERS]	
+		}
+
+	}
+}
+

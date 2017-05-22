@@ -1,0 +1,1 @@
+<tr><td class='cTableBgcCell'>[DOMAIN_OBJECT_PROPERTY_NAME]</td><td>[OBJECT_PROPERTY_FORM_ELEMENT]</td></tr>

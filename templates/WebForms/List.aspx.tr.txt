@@ -1,0 +1,1 @@
+<asp:BoundField DataField="[DOMAIN_OBJECT_PROPERTY_NAME]" ReadOnly="True" HeaderText="[DOMAIN_OBJECT_PROPERTY_NAME]"  SortExpression="[DOMAIN_OBJECT_PROPERTY_NAME]"  />

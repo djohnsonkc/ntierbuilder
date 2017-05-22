@@ -1,0 +1,159 @@
+using System;
+using System.Data;
+using System.Data.SqlClient;
+using System.Data.SqlTypes; //for using SqlDateType
+
+namespace CMED.Data
+{
+
+    public class BaseAdapter
+    {
+        private string connectionString = System.Web.Configuration.WebConfigurationManager.ConnectionStrings["Sales"].ConnectionString;
+        internal IDbConnection idbConn = null;
+        internal IDataReader reader = null;
+        internal SqlConnection conn;
+        internal SqlCommand cmd;
+
+        public BaseAdapter()
+        {
+        }
+
+        internal void SetCommand(string command)
+        {
+            conn = new SqlConnection(connectionString);
+            cmd = new SqlCommand(command, conn);
+            cmd.CommandType = CommandType.StoredProcedure;
+        }
+
+        internal void AddInputParameter(string param_name, object param_value)
+        {
+            cmd.Parameters.AddWithValue("@" + param_name, param_value);
+        }
+
+        internal void AddOutputParameter(string param_name)
+        {
+            cmd.Parameters.Add("@" + param_name, SqlDbType.Int, 4);
+            cmd.Parameters["@" + param_name].Direction = ParameterDirection.Output;
+        }
+
+        //this method returns the new @@IDENTITY value for the id column
+        internal int GetInt32IdentityValue()
+        {
+            int id = (int)cmd.Parameters["@ID"].Value;
+            return id;
+        }
+        internal Int64 GetInt64IdentityValue()
+        {
+            Int64 id = Int64.Parse(cmd.Parameters["@ID"].Value.ToString());
+            return id;
+        }
+        internal void ExecuteReader()
+        {
+            conn.Open();
+            reader = cmd.ExecuteReader();
+        }
+
+        internal void ExecuteNonQuery()
+        {
+            conn.Open();
+            cmd.ExecuteNonQuery();
+        }
+
+        internal bool ReaderHasData()
+        {
+            bool result = false;
+            if (reader.Read())
+            {
+                result = true;
+            }
+            return result;
+        }
+
+        internal void Close()
+        {
+            conn.Close();
+            cmd.Dispose();
+        }
+
+
+        #region Object Readers
+
+        internal Int64 GetInt64(String column, IDataReader reader)
+        {
+            Int64 default_value = 0;
+            Int64 data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                                    ? default_value : (Int64)reader[column];
+            return data;
+        }
+
+        internal int GetInt32(String column, IDataReader reader)
+        {
+            int default_value = 0;
+            int data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                                    ? default_value : (int)reader[column];
+            return data;
+        }
+
+        internal short GetInt16(String column, IDataReader reader)
+        {
+            short default_value = 0;
+            short data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                                  ? default_value : (short)reader[column];
+            return data;
+        }
+
+        internal float GetFloat(String column, IDataReader reader)
+        {
+            float default_value = 0;
+            float data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                        ? default_value : float.Parse(reader[column].ToString());
+            return data;
+        }
+
+        internal decimal GetDecimal(String column, IDataReader reader)
+        {
+            decimal default_value = 0;
+            decimal data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                        ? default_value : decimal.Parse(reader[column].ToString());
+            return data;
+        }
+
+        internal bool GetBoolean(String column, IDataReader reader)
+        {
+            bool default_value = false;
+            bool data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                                     ? default_value : (bool)reader[column];
+            return data;
+        }
+
+        internal String GetString(String column, IDataReader reader)
+        {
+            string default_value = "";
+            String data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                                   ? default_value : reader[column].ToString();
+            return data;
+        }
+
+        internal Char GetChar(String column, IDataReader reader)
+        {
+            char default_value = ' ';
+            char data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                                   ? default_value : char.Parse(reader[column].ToString());
+            return data;
+        }
+
+        internal DateTime GetDateTime(String column, IDataReader reader)
+        {
+            //DateTime default_value = DateTime.Now;
+            DateTime default_value = (DateTime)SqlDateTime.Null;
+            DateTime data = (reader.IsDBNull(reader.GetOrdinal(column)))
+                                  ? default_value : (DateTime)reader[column];
+            return data;
+        }
+
+
+        #endregion 
+
+    }
+}
+
