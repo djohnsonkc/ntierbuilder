@@ -19,7 +19,8 @@ Using a simple table definition like below, N-Tier Builder will help you build y
 
 ### Domain Objects
 
-N-Tier Builder creates C# code for your object class (e.g. Customer.cs) with a constructor and declares all of it's private properties as well as setters and getters for it's public properties. (see example) 
+N-Tier Builder creates C# code for your object class (e.g. Customer.cs) with a constructor and declares all of it's private properties as well as setters and getters for it's public properties. 
+[See Sample](https://github.com/djohnsonkc/ntierbuilder/blob/master/samples/Customer.cs.txt) 
 
 ### Data Access Layer
 
