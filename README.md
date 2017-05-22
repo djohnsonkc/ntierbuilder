@@ -6,14 +6,14 @@ N-Tier Builder is an object persistence code generator that uses an existing SQL
 
 Using a simple table definition like below, N-Tier Builder will help you build your app faster and with much more consistency.
 
-CustomerID, int, 4, 1
-Name, varchar, 50, 0
-Address, varchar, 50, 0
-City, varchar, 50, 0
-State, varchar, 50, 0
-Zip, varchar, 50, 0
-Active, bit, 1, 0
-DateCreated, datetime, 8, 0
+    CustomerID, int, 4, 1
+	Name, varchar, 50, 0
+	Address, varchar, 50, 0
+	City, varchar, 50, 0
+	State, varchar, 50, 0
+	Zip, varchar, 50, 0
+	Active, bit, 1, 0
+	DateCreated, datetime, 8, 0
 
 ## Here is a list of things that it will build for you
 
