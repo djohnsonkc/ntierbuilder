@@ -24,11 +24,14 @@ N-Tier Builder creates C# code for your object class (e.g. Customer.cs) with a c
 
 ### Data Access Layer
 
-N-Tier Builder creates SQL Server stored procedures for inserting, updating, deleting, and retrieving records in your database. The connection to the Data Access Layer is controlled by your Web.config or Machine.config connection setting. (see example)
+N-Tier Builder creates SQL Server stored procedures for inserting, updating, deleting, and retrieving records in your database. The connection to the Data Access Layer is controlled by your Web.config or Machine.config connection setting. 
+[See Sample](https://github.com/djohnsonkc/ntierbuilder/blob/master/samples/StoredProcedures.sql.txt) 
 
-N-Tier Builder also creates "adapters" to load your data into your Domain Object. (see example)
+N-Tier Builder also creates "adapters" to load your data into your Domain Object. 
+[See Sample](https://github.com/djohnsonkc/ntierbuilder/blob/master/samples/CustomerAdapter.cs.txt) 
 
-N-Tier Builder provides a "base adapter" that all adapters can inherit from and contain most of the actual code for accessing your database. (see example)
+N-Tier Builder provides a "base adapter" that all adapters can inherit from and contain most of the actual code for accessing your database. 
+[See Sample](https://github.com/djohnsonkc/ntierbuilder/blob/master/samples/BaseAdapter.txt) 
 
 
 ### Presentation Layer
