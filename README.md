@@ -1,4 +1,4 @@
-NTierBUilder (.NET)
+N-Tier Builder (.NET)
 =====================================
 N-Tier Builder is an object persistence code generator that uses an existing SQL Server table schema to generate a domain object, data access layer and presentation layer for a specified table. 
 
@@ -33,11 +33,43 @@ N-Tier Builder also creates "adapters" to load your data into your Domain Object
 N-Tier Builder provides a "base adapter" that all adapters can inherit from and contain most of the actual code for accessing your database. 
 [See Sample](https://github.com/djohnsonkc/ntierbuilder/blob/master/samples/BaseAdapter.txt) 
 
-
 ### Presentation Layer
 
 N-Tier Builder creates ASP.NET Web Form HTML and C# code for viewing, adding, editing, and removing objects/records via calls to objects in the Data Access Layer. The code-behind for the Web Forms will instantiate objects and call public methods from the Data Access Layer.
 (see examples: List.aspx List.cs View.aspx View.cs Edit.aspx Edit.cs	) 
 
+## Getting Started
 
+Use the following SQL query to generate a table definition that you can use to paste in to N-Tier Builder
+
+	DECLARE @TableName varchar(50)
+	SET @TableName = '<Enter Name Here>'
+
+	select
+	c.name + ',' As ColumnName,
+	st.name + ',' As TypeName,
+	IsNull(CAST(c.Prec as varchar(5)), '4000') + ',' As Length,
+	c.ColStat
+
+	from syscolumns c,
+	sysobjects o,
+	systypes st
+
+	where
+	c.id = o.id AND
+	c.xtype = st.xtype AND
+	o.Name = @TableName AND
+	NOT st.Name = 'sysname'
+
+	order by o.name, c.colorder
+
+
+Once the results are pasted in, you will be walked through a simple wizard that will allow you to name things that N-Tier Builder will generate for you. 
+
+These things include:
+
+* Namespaces for your Domain object and Data Adapter objects
+* Stored procedure names
+* A preferred database user name that should be granted access to the Stored procedures
+* Connection string using a preferred database user name
 
