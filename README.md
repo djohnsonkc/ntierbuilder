@@ -1,4 +1,4 @@
-NTierBUilder
+NTierBUilder (.NET)
 =====================================
 N-Tier Builder is an object persistence code generator that uses an existing SQL Server table schema to generate a domain object, data access layer and presentation layer for a specified table. 
 
